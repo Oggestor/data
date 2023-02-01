@@ -61,6 +61,7 @@ vari_names <- c("number","type","y5","y3","y2","age","sex","role","years",
 
 mat <- matrix(NA,16855,37)
 colnames(mat) <- vari_names
+num <- c(5,7,8,40,41,42,43,48,56,58,59,61,62)
 
 m <- 1
 for(i in 1:length(for_num)){
@@ -77,7 +78,7 @@ df <- as_tibble(mat)
 df$number <- as.numeric(df$number)
 
 
-num <- c(5,7,8,40,41,42,43,48,56,58,59,61,62)
+
 
 Bolag5 <- tibble()
 Bolag7 <- tibble()
