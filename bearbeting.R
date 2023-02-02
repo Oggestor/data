@@ -142,6 +142,11 @@ for(i in h1_h6){
   
    df[df[,i] == "" ,i]<- "NA"
    df[df[,i] == ("0") | df[,i] == ("-1") | df[,i] == ("6"),i] <- "vet ej"
+   
+   df[(df$number == 58 | df$number == 59) & df[,i] == ("2"),i] <- "2.67"
+   df[(df$number == 58 | df$number == 59) & df[,i] == ("3"),i] <- "3.37"
+   df[(df$number == 58 | df$number == 59) & df[,i] == ("5"),i] <- "vet ej"
+  
 }
 
 
@@ -249,10 +254,12 @@ df <- df[,-c(6,8,9)]
 df[df == "NA"] <- NA
 
 
-df[,names(df)[-1]] <- lapply(df[,names(df)[-1]],factor)
+df$y <- c(df$y5[1:7656],df$y3[7657:12003],df$y2[12004:13527],
+          df$y3[13528:14512],df$y2[14513:16457],df$y3[16458:16854])
 
-
-
+df[df == "vet ej" | df == "annat/vill ej uppge" |df == "vill ej uppge" ] <- NA
+df[,names(df)[c(2:6,34:35)]] <- lapply(df[,names(df)[c(2:6,34:35)]],factor)
+df[,names(df)[-c(2:6,34:35)]] <- lapply(df[,names(df)[-c(2:6,34:35)]],as.numeric)
 
 
 
