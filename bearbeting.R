@@ -51,17 +51,20 @@ for_typ <- c(rep("Bank_finans",144),rep("Bank_finans",135),
 
 
 
-vari_names <- c("number","type","y5","y3","y2","age","sex","role","years",
-                "h1","h2","h3","h4","h5","h6",
+vari_names <- c("number","type","y5","y3","y2","age","sex",
                 "t1","t2","t3","t4","t5","t6",
-                "k1","k2","k3","k4","l1","l2",
+                "t7","t8","t9","t10","t11","t12","t13",
+                "k1","k2","k3","k4","k5","k6",
+                "l1","l2","l3","l4",
                 "lb1","lb2","lb3","lb4","lb5","lb6","lb7",
-                "a1","i1","v1")
+                "a1","a2","i1","i2","v1","v2",
+                "ks1","ks2","ks3","ks4")
 
 
-mat <- matrix(NA,16855,37)
+mat <- matrix(NA,14512,37+10) # pre 16855
 colnames(mat) <- vari_names
 num <- c(5,7,8,40,41,42,43,48,56,58,59,61,62)
+num <- num[-(9:13)]
 
 m <- 1
 for(i in 1:length(for_num)){
@@ -88,14 +91,10 @@ Bolag41 <- tibble()
 Bolag42 <- tibble()
 Bolag43 <- tibble()
 Bolag48 <- tibble()
-Bolag56 <- tibble()
-Bolag58 <- tibble()
-Bolag59 <- tibble()
-Bolag61 <- tibble()
-Bolag62 <- tibble()
+
 
 list <- list(Bolag5,Bolag7,Bolag8,Bolag40,Bolag41,Bolag42,Bolag43,
-             Bolag48,Bolag56,Bolag58,Bolag59,Bolag61,Bolag62)
+             Bolag48)
 
 
 for(i in 1:length(list)){
@@ -130,22 +129,22 @@ df[is.na(df)] <- "NA"
 df[df == ""] <- "NA"
 df[df == " - "] <- "NA"
 
-df <- df[-15594,] # någon skum rad hade smugit in
+#df <- df[-15594,] # någon skum rad hade smugit in
 
 
 
 # ÄNDRAR SKALOR ----------------------------------------------------------------
 
-# alla 1-5 variabler , OBS OBS MÅSTE SES ÖVER, VISSA 1-4
-h1_h6 <- 10:36
+# alla 1-5 variabler , 
+h1_h6 <- 8:41
 for(i in h1_h6){
   
    df[df[,i] == "" ,i]<- "NA"
    df[df[,i] == ("0") | df[,i] == ("-1") | df[,i] == ("6"),i] <- "vet ej"
    
-   df[(df$number == 58 | df$number == 59) & df[,i] == ("2"),i] <- "2.67"
-   df[(df$number == 58 | df$number == 59) & df[,i] == ("3"),i] <- "3.37"
-   df[(df$number == 58 | df$number == 59) & df[,i] == ("5"),i] <- "vet ej"
+   # df[(df$number == 58 | df$number == 59) & df[,i] == ("2"),i] <- "2.67"
+   # df[(df$number == 58 | df$number == 59) & df[,i] == ("3"),i] <- "3.37"
+   # df[(df$number == 58 | df$number == 59) & df[,i] == ("5"),i] <- "vet ej"
   
 }
 
@@ -161,14 +160,45 @@ df[df[,7] == "3"|df[,7] == "4"|df[,7] == "5"|
 (table(df$sex))
 
 
-# v1
-df[df[,37] == "3",37] <- "vill ej uppge"
+# v1 & v2
+df[df[,42] == "1",42] <- "ja"
+df[df[,42] == "2",42] <- "nej"
+df[df[,42] == "3",42] <- "vill ej uppge"
+
+
+df[df[,43] == "1",43] <- "ja"
+df[df[,43] == "2",43] <- "nej"
+df[df[,43] == "3",43] <- "vill ej uppge"
 (table(df$v1))
+(table(df$v2))
+
+
+
+# ks1 -ks4
+df[df[,44] == "1",44] <- "ja"
+df[df[,44] == "2",44] <- "nej"
+df[df[,44] == "3",44] <- "vill ej uppge"
+
+
+df[df[,45] == "1",45] <- "ja"
+df[df[,45] == "2",45] <- "nej"
+df[df[,45] == "3",45] <- "vill ej uppge"
+
+
+df[df[,46] == "1",46] <- "ja"
+df[df[,46] == "2",46] <- "nej"
+df[df[,46] == "3",46] <- "vill ej uppge"
+
+
+df[df[,47] == "1",47] <- "ja"
+df[df[,47] == "2",47] <- "nej"
+df[df[,47] == "3",47] <- "vill ej uppge"
+
 
 
 
 # y
-bolag1till5 <- c(7,40,41,42,43,56,62)
+bolag1till5 <- c(7,40,41,42,43)
 for(j in 1:length(bolag1till5)){
     
     if((df[which(df$number == bolag1till5[j])[1],3] == "NA") &
@@ -199,10 +229,9 @@ for(j in 1:length(bolag1till5)){
 }
 
 
-bolag1till2 <- c(5,8,48,58,59,61)
+bolag1till2 <- c(5,8,48)
 
 
-  
 for(j in 1:length(bolag1till2)){
   if((df[which(df$number == bolag1till2[j])[1],3] == "NA") &
      (df[which(df$number == bolag1till2[j])[1],4] == "NA")){
@@ -237,29 +266,77 @@ table(df$y3)
 
 
 # age 
-table(df$age) # FÖR MKE NA
-
-# years
-table(df$years) # FÖR MKE NA
-
-# type
-table(df$type) # FÖR MKE NA
 
 
-# TAR BORT age, years, type
+df[df[,6] == "1",6] <- "25 år eller yngre"
+df[df[,6] == "2",6] <- "26-35 år"
+df[df[,6] == "3",6] <- "36 år eller äldre"
+df[df[,6] == "4",6] <- "36 år eller äldre"
+df[df[,6] == "5",6] <- "36 år eller äldre"
+df[df[,6] == "6",6] <- "36 år eller äldre"
+df[df[,6] == "7",6] <- "Vill ej uppge"
 
-df <- df[,-c(6,8,9)]
+table(df$age) 
 
 
 df[df == "NA"] <- NA
 
 
 df$y <- c(df$y5[1:7656],df$y3[7657:12003],df$y2[12004:13527],
-          df$y3[13528:14512],df$y2[14513:16457],df$y3[16458:16854])
+          df$y3[13528:14512])
 
-df[df == "vet ej" | df == "annat/vill ej uppge" |df == "vill ej uppge" ] <- NA
-df[,names(df)[c(2:6,34:35)]] <- lapply(df[,names(df)[c(2:6,34:35)]],factor)
-df[,names(df)[-c(2:6,34:35)]] <- lapply(df[,names(df)[-c(2:6,34:35)]],as.numeric)
+df[df == "vet ej" | df == "annat/vill ej uppge" |df == "vill ej uppge" |df == "Vill ej uppge" ] <- NA
+df[,names(df)[c(2:7,42:48)]] <- lapply(df[,names(df)[c(2:7,42:48)]],factor)
+df[,names(df)[-c(2:7,42:48)]] <- lapply(df[,names(df)[-c(2:7,42:48)]],as.numeric)
+str(df)
+
+
+
+
+df_bygg <- df[df$type=="Bygg",c(1:7,8,9,15,20,21:26,27,38:48)]
+df_bygg <- df_bygg[,-c(4:5,21:22)]
+sum(table(df_bygg$y5))
+
+df_sjukvard <- df[df$type=="Sjukvard",c(1:5,9,11,13:19,21:24,28:37,40:42,48)]
+df_sjukvard <- df_sjukvard[,-3]
+df_sjukvard <- df_sjukvard[-(3318:4337),] # TAR BORT STORT NA GAP
+sum(table(df_sjukvard$y))
+
+
+df_b_test <- df_bygg[!is.na(df_bygg$y),]
+
+
+
+for(i in 1:ncol(df_b_test)){
+  
+  diff <- nrow(df_b_test) -sum(table(df_b_test[,i]))
+  print(paste(colnames(df_b_test)[i]," har ", diff, " NA:s"))
+  
+}
+
+
+for(i in 1:ncol(df_sjukvard)){
+  
+  diff <- nrow(df_sjukvard) -sum(table(df_sjukvard[,i]))
+  print(paste(colnames(df_sjukvard)[i]," har ", diff, " NA:s"))
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
