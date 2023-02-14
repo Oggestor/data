@@ -196,9 +196,8 @@ df[df[,47] == "3",47] <- "vill ej uppge"
 
 
 
-
 # y
-bolag1till5 <- c(7,40,41,42,43)
+bolag1till5 <- c(7,40,42,43)
 for(j in 1:length(bolag1till5)){
     
     if((df[which(df$number == bolag1till5[j])[1],3] == "NA") &
@@ -229,7 +228,7 @@ for(j in 1:length(bolag1till5)){
 }
 
 
-bolag1till2 <- c(5,8,48)
+bolag1till2 <- c(5,8,41,48)
 
 
 for(j in 1:length(bolag1till2)){
@@ -323,16 +322,19 @@ for(i in 1:ncol(df_sjukvard)){
 }
 
 
+round(prop.table(table(df_bygg[df_bygg$number == 5,25])),3)
+round(prop.table(table(df_bygg[df_bygg$number == 7,25])),3)
+round(prop.table(table(df_bygg[df_bygg$number == 8,25])),3)
 
 
 
 
 
-
-
-
-
-
+round(prop.table(table(df_sjukvard[df_sjukvard$number == 40,31])),3)
+round(prop.table(table(df_sjukvard[df_sjukvard$number == 41,31])),3)
+round(prop.table(table(df_sjukvard[df_sjukvard$number == 42,31])),3)
+round(prop.table(table(df_sjukvard[df_sjukvard$number == 43,31])),3)
+round(prop.table(table(df_sjukvard[df_sjukvard$number == 48,31])),3)
 
 
 
