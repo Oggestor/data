@@ -1,5 +1,3 @@
-
-
 library(stringr)
 library(tibble)
 
@@ -27,25 +25,25 @@ for_num <- c(rep(1,144),rep(2,135),
 
 
 for_typ <- c(rep("Bank_finans",144),rep("Bank_finans",135),
-            rep("Bemaning",30),rep("Bemaning",103),
-            rep("Bygg",1737),rep("Bygg",122),rep("Bygg",3437),rep("Bygg",2491),rep("Bygg",23),rep("Bygg",22),rep("Bygg",22),
-            rep("Data_IT",48),rep("Data_IT",112),rep("Data_IT",257),rep("Data_IT",15),rep("Data_IT",46),rep("Data_IT",49),rep("Data_IT",41),
-            rep("Fastighet",157),rep("Fastighet",176),rep("Fastighet",216),rep("Fastighet",284),rep("Fastighet",70), rep("Fastighet",18),
-            rep("Fastighet",81),rep("Fastighet",189),rep("Fastighet",146),rep("Fastighet",142), rep("Fastighet",142),rep("Fastighet",653),
-            rep("Fastighet",40),rep("Fastighet",37), rep("Fastighet",66),rep("Fastighet",77),rep("Fastighet",21),
-            rep("Företagstjänster",511),
-            rep("Hotell_Resturang",27),
-            rep("Sjukvard",74),rep("Sjukvard",2465),rep("Sjukvard",501),rep("Sjukvard",3836),rep("Sjukvard",776),rep("Sjukvard",749),
-            rep("Sjukvard",323),rep("Sjukvard",317),rep("Sjukvard",296),rep("Sjukvard",315),rep("Sjukvard",985),
-            rep("Juridik",120),rep("Juridik",71),rep("Juridik",43),
-            rep("Kultur_Noje",148),rep("Kultur_Noje",232),rep("Kultur_Noje",66),
-            rep("Motorfordon",75),
-            rep("Organisationer",180),rep("Organisationer",745),rep("Organisationer",901),rep("Organisationer",796),rep("Organisationer",80),rep("Organisationer",69),rep("Organisationer",397),
-            rep("Partihandel",147),rep("Partihandel",125),
-            rep("Teknik",21), rep("Teknik",10), rep("Teknik",37),
-            rep("Tillverkning",446),
-            rep("Transport",72),
-            rep("Utbildning",1684), rep("Utbildning",430), rep("Utbildning",52), rep("Utbildning",69), rep("Utbildning",84)
+             rep("Bemaning",30),rep("Bemaning",103),
+             rep("Bygg",1737),rep("Bygg",122),rep("Bygg",3437),rep("Bygg",2491),rep("Bygg",23),rep("Bygg",22),rep("Bygg",22),
+             rep("Data_IT",48),rep("Data_IT",112),rep("Data_IT",257),rep("Data_IT",15),rep("Data_IT",46),rep("Data_IT",49),rep("Data_IT",41),
+             rep("Fastighet",157),rep("Fastighet",176),rep("Fastighet",216),rep("Fastighet",284),rep("Fastighet",70), rep("Fastighet",18),
+             rep("Fastighet",81),rep("Fastighet",189),rep("Fastighet",146),rep("Fastighet",142), rep("Fastighet",142),rep("Fastighet",653),
+             rep("Fastighet",40),rep("Fastighet",37), rep("Fastighet",66),rep("Fastighet",77),rep("Fastighet",21),
+             rep("Företagstjänster",511),
+             rep("Hotell_Resturang",27),
+             rep("Sjukvard",74),rep("Sjukvard",2465),rep("Sjukvard",501),rep("Sjukvard",3836),rep("Sjukvard",776),rep("Sjukvard",749),
+             rep("Sjukvard",323),rep("Sjukvard",317),rep("Sjukvard",296),rep("Sjukvard",315),rep("Sjukvard",985),
+             rep("Juridik",120),rep("Juridik",71),rep("Juridik",43),
+             rep("Kultur_Noje",148),rep("Kultur_Noje",232),rep("Kultur_Noje",66),
+             rep("Motorfordon",75),
+             rep("Organisationer",180),rep("Organisationer",745),rep("Organisationer",901),rep("Organisationer",796),rep("Organisationer",80),rep("Organisationer",69),rep("Organisationer",397),
+             rep("Partihandel",147),rep("Partihandel",125),
+             rep("Teknik",21), rep("Teknik",10), rep("Teknik",37),
+             rep("Tillverkning",446),
+             rep("Transport",72),
+             rep("Utbildning",1684), rep("Utbildning",430), rep("Utbildning",52), rep("Utbildning",69), rep("Utbildning",84)
 )
 
 
@@ -98,7 +96,7 @@ list <- list(Bolag5,Bolag7,Bolag8,Bolag40,Bolag41,Bolag42,Bolag43,
 
 
 for(i in 1:length(list)){
-list[[i]] <- read.csv2(str_c("https://raw.githubusercontent.com/Oggestor/Uppsats/main/Bolag",num[i],".csv",collapse = ""))
+  list[[i]] <- read.csv2(str_c("https://raw.githubusercontent.com/Oggestor/Uppsats/main/Bolag",num[i],".csv",collapse = ""))
 }
 
 
@@ -110,17 +108,17 @@ for(i in 1:length(list)){
 
 cuma <- 1
 for(i in 1:length(list)){
- 
-    for(g in 1:(ncol(df))){ # 37
+  
+  for(g in 1:(ncol(df))){ # 37
+    
+    if(any(colnames(list[[i]]) == colnames(df)[g])){
       
-      if(any(colnames(list[[i]]) == colnames(df)[g])){
-        
-        
-        df[cuma:(cuma-1+(table(df$number)[i])),which(colnames(df) == colnames(df)[g])] <- list[[i]][1:table(df$number)[i],which(colnames(list[[i]]) == colnames(df)[g])]
-     
-      }
-     
+      
+      df[cuma:(cuma-1+(table(df$number)[i])),which(colnames(df) == colnames(df)[g])] <- list[[i]][1:table(df$number)[i],which(colnames(list[[i]]) == colnames(df)[g])]
+      
     }
+    
+  }
   cuma <- cuma + (table(df$number)[i]) 
 }
 
@@ -139,12 +137,12 @@ df[df == " - "] <- "NA"
 h1_h6 <- 8:41
 for(i in h1_h6){
   
-   df[df[,i] == "" ,i]<- "NA"
-   df[df[,i] == ("0") | df[,i] == ("-1") | df[,i] == ("6"),i] <- "vet ej"
-   
-   # df[(df$number == 58 | df$number == 59) & df[,i] == ("2"),i] <- "2.67"
-   # df[(df$number == 58 | df$number == 59) & df[,i] == ("3"),i] <- "3.37"
-   # df[(df$number == 58 | df$number == 59) & df[,i] == ("5"),i] <- "vet ej"
+  df[df[,i] == "" ,i]<- "NA"
+  df[df[,i] == ("0") | df[,i] == ("-1") | df[,i] == ("6"),i] <- "vet ej"
+  
+  # df[(df$number == 58 | df$number == 59) & df[,i] == ("2"),i] <- "2.67"
+  # df[(df$number == 58 | df$number == 59) & df[,i] == ("3"),i] <- "3.37"
+  # df[(df$number == 58 | df$number == 59) & df[,i] == ("5"),i] <- "vet ej"
   
 }
 
@@ -199,32 +197,32 @@ df[df[,47] == "3",47] <- "vill ej uppge"
 # y
 bolag1till5 <- c(7,40,42,43)
 for(j in 1:length(bolag1till5)){
-    
-    if((df[which(df$number == bolag1till5[j])[1],3] == "NA") &
-       (df[which(df$number == bolag1till5[j])[1],4] == "NA")){
-      i <- 5
-    }else if((df[which(df$number == bolag1till5[j])[1],4] == "NA") &
-             (df[which(df$number == bolag1till5[j])[1],5] == "NA")){
-      i <- 3
-    }else{
-      i <- 4
-    }
-
+  
+  if((df[which(df$number == bolag1till5[j])[1],3] == "NA") &
+     (df[which(df$number == bolag1till5[j])[1],4] == "NA")){
+    i <- 5
+  }else if((df[which(df$number == bolag1till5[j])[1],4] == "NA") &
+           (df[which(df$number == bolag1till5[j])[1],5] == "NA")){
+    i <- 3
+  }else{
+    i <- 4
+  }
+  
   
   df[df$number == bolag1till5[j] & (df$y5 == "1" | df$y5 == "2" |
-                                    df$y3 == "1" | df$y3 == "2" |
-                                    df$y2 == "1" | df$y2 == "2"),i] <- "nej"
+                                      df$y3 == "1" | df$y3 == "2" |
+                                      df$y2 == "1" | df$y2 == "2"),i] <- "nej"
   
   df[df$number == bolag1till5[j] & (df$y5 == "4" | df$y5 == "5" |
-                                    df$y3 == "4" | df$y3 == "5" |
-                                    df$y2 == "4" | df$y2 == "5"),i] <- "ja"
+                                      df$y3 == "4" | df$y3 == "5" |
+                                      df$y2 == "4" | df$y2 == "5"),i] <- "ja"
   
   
   df[df$number == bolag1till5[j] & 
        (df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|
-        df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
-        df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "vet ej"
- 
+          df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
+          df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "vet ej"
+  
 }
 
 
@@ -241,22 +239,22 @@ for(j in 1:length(bolag1till2)){
   }else{
     i <- 4
   }
-
-    
-    df[df$number == bolag1till2[j] & (df$y5 == "1"  |
+  
+  
+  df[df$number == bolag1till2[j] & (df$y5 == "1"  |
                                       df$y3 == "1" | 
                                       df$y2 == "1" ),i] <- "ja"
-    
-    df[df$number == bolag1till2[j] & (df$y5 == "2" | 
+  
+  df[df$number == bolag1till2[j] & (df$y5 == "2" | 
                                       df$y3 == "2" |
                                       df$y2 == "2" ),i] <- "nej"
-    
-    
-    df[df$number == bolag1till2[j] & 
-         (df$y5 == "3" | df$y5 == "4" | 
+  
+  
+  df[df$number == bolag1till2[j] & 
+       (df$y5 == "3" | df$y5 == "4" | 
           df$y3 == "3" | df$y3 == "4" | 
           df$y2 == "3" | df$y2 == "4" ),i] <- "vet ej"
-    
+  
 }
 
 table(df$y5)
@@ -284,12 +282,15 @@ df[df == "NA"] <- NA
 df$y <- c(df$y5[1:7656],df$y3[7657:12003],df$y2[12004:13527],
           df$y3[13528:14512])
 
+df1 <- df[,-c(3,4,5,48)]
+df1[(df1 == "vet ej" | df1== "annat/vill ej uppge" |df1== "vill ej uppge" |df1 == "Vill ej uppge" )] <- NA
 df[df == "vet ej" | df == "annat/vill ej uppge" |df == "vill ej uppge" |df == "Vill ej uppge" ] <- NA
+
+df_vetej <- cbind(df1[,1:2],df[,3:5],df1[,3:44],df[,48])
+
+
 df[,names(df)[c(2:7,42:48)]] <- lapply(df[,names(df)[c(2:7,42:48)]],factor)
 df[,names(df)[-c(2:7,42:48)]] <- lapply(df[,names(df)[-c(2:7,42:48)]],as.numeric)
-str(df)
-
-
 
 
 df_bygg <- df[df$type=="Bygg",c(1:7,8,9,15,20,21:26,27,38:48)]
@@ -306,39 +307,20 @@ df_b_test <- df_bygg[!is.na(df_bygg$y),]
 
 
 
-for(i in 1:ncol(df_b_test)){
-  
-  diff <- nrow(df_b_test) -sum(table(df_b_test[,i]))
-  print(paste(colnames(df_b_test)[i]," har ", diff, " NA:s"))
-  
-}
+# VET EJ på y DF -----------------------------------------------------------------------
+
+df_vetej[,names(df_vetej)[c(2:7,42:48)]] <- lapply(df_vetej[,names(df_vetej)[c(2:7,42:48)]],factor)
+df_vetej[,names(df_vetej)[-c(2:7,42:48)]] <- lapply(df_vetej[,names(df_vetej)[-c(2:7,42:48)]],as.numeric)
 
 
-for(i in 1:ncol(df_sjukvard)){
-  
-  diff <- nrow(df_sjukvard) -sum(table(df_sjukvard[,i]))
-  print(paste(colnames(df_sjukvard)[i]," har ", diff, " NA:s"))
-  
-}
+df_vetej_bygg <- df_vetej[df_vetej$type=="Bygg",c(1:7,8,9,15,20,21:26,27,38:48)]
+df_vetej_bygg <- df_vetej_bygg[,-c(4:5,21:22)]
+sum(table(df_vetej_bygg$y5))
+
+df_vetej_sjukvard <- df_vetej[df_vetej$type=="Sjukvard",c(1:5,9,11,13:19,21:24,28:37,40:42,48)]
+df_vetej_sjukvard <- df_vetej_sjukvard[,-3]
+df_vetej_sjukvard <- df_vetej_sjukvard[-(3318:4337),] # TAR BORT STORT NA GAP
+sum(table(df_vetej_sjukvard$y))
 
 
-round(prop.table(table(df_bygg[df_bygg$number == 5,25])),3)
-round(prop.table(table(df_bygg[df_bygg$number == 7,25])),3)
-round(prop.table(table(df_bygg[df_bygg$number == 8,25])),3)
-
-
-
-
-
-round(prop.table(table(df_sjukvard[df_sjukvard$number == 40,31])),3)
-round(prop.table(table(df_sjukvard[df_sjukvard$number == 41,31])),3)
-round(prop.table(table(df_sjukvard[df_sjukvard$number == 42,31])),3)
-round(prop.table(table(df_sjukvard[df_sjukvard$number == 43,31])),3)
-round(prop.table(table(df_sjukvard[df_sjukvard$number == 48,31])),3)
-
-
-
-
-
-
-
+df_vetej_b_test <- df_vetej_bygg[!is.na(df_vetej_bygg$y),]
