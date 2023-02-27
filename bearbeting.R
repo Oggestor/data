@@ -284,10 +284,10 @@ df$y <- c(df$y5[1:7656],df$y3[7657:12003],df$y2[12004:13527],
 
 df1 <- df[,-c(3,4,5,48)]
 df1[(df1 == "vet ej" | df1== "annat/vill ej uppge" |df1== "vill ej uppge" |df1 == "Vill ej uppge" )] <- NA
-df[df == "vet ej" | df == "annat/vill ej uppge" |df == "vill ej uppge" |df == "Vill ej uppge" ] <- NA
+
 
 df_vetej <- cbind(df1[,1:2],df[,3:5],df1[,3:44],df[,48])
-
+df[df == "vet ej" | df == "annat/vill ej uppge" |df == "vill ej uppge" |df == "Vill ej uppge" ] <- NA
 
 df[,names(df)[c(2:7,42:48)]] <- lapply(df[,names(df)[c(2:7,42:48)]],factor)
 df[,names(df)[-c(2:7,42:48)]] <- lapply(df[,names(df)[-c(2:7,42:48)]],as.numeric)
