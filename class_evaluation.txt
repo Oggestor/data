@@ -1,16 +1,20 @@
+
 class_evaluation <- function(new_data, model, true_y, type = "class", digits = 3,logi = FALSE){
+  
   # Predikterar klassen för new_data givet den skattade modellen
   if(any(str_detect(class(model), pattern = "keras"))){
     pred <- predict_classes(model, new_data)  
   } else {
+
     pred <- predict(model, newdata = new_data, type = type)  
-  }
    
+  }
+  
   # Konverterar de predikterade klasserna till en faktor med samma nivåer som de sanna klasserna
   if(logi == FALSE){
   pred <- factor(pred, levels = levels(factor(true_y)))
   }else{
-  pred <- ifelse(pred >0.5, " >50K", " <=50K")
+  pred <- ifelse(pred >0.5, "nej", "ja")
   }
   
   # Skapar förväxlingsmatris med rader som indikerar sanna klassen och kolumnen som indikerar predikterade klassen
