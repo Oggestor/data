@@ -241,13 +241,13 @@ for(j in 1:length(bolag1till2)){
   }
   
   
-  df[df$number == bolag1till2[j] & (df$y5 == "1"  |
-                                      df$y3 == "1" | 
-                                      df$y2 == "1" ),i] <- "ja"
+  df[df$number == bolag1till2[j] & (df$y5 == "1"  | df$y5 == "3" | df$y5 == "4" | 
+                                      df$y3 == "1" |  df$y3 == "3" | df$y3 == "4" | 
+                                      df$y2 == "1" | df$y2 == "3" | df$y2 == "4"),i] <- "ja"
   
-  df[df$number == bolag1till2[j] & (df$y5 == "2" | df$y5 == "3" | df$y5 == "4" | 
-                                      df$y3 == "2" | df$y3 == "3" | df$y3 == "4" | 
-                                      df$y2 == "2" | df$y2 == "3" | df$y2 == "4"),i] <- "nej"
+  df[df$number == bolag1till2[j] & (df$y5 == "2" | 
+                                      df$y3 == "2" |
+                                      df$y2 == "2" ),i] <- "nej"
   
   
   # df[df$number == bolag1till2[j] & 
