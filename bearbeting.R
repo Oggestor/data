@@ -343,7 +343,53 @@ if(y_3class == TRUE){
   
 }
 
+for_num <- c(rep(1,144),rep(2,135),
+             rep(3,30),rep(4,103),
+             rep(5,1737),rep(6,122),rep(7,3437),rep(8,2491),rep(9,23),rep(10,22),rep(11,22),
+             rep(12,48),rep(13,112),rep(14,257),rep(15,15),rep(16,46),rep(17,49),rep(18,41),
+             rep(19,157),rep(20,176),rep(21,216),rep(22,284),rep(23,70), rep(24,18),
+             rep(25,81),rep(26,189),rep(27,146),rep(28,142), rep(29,142),rep(30,653),
+             rep(31,40),rep(32,37), rep(33,66),rep(34,77),rep(35,21),
+             rep(36,511),
+             rep(37,27),
+             rep(38,74),rep(39,2465),rep(40,501),rep(41,3836),rep(42,776),rep(43,749),
+             rep(44,323),rep(45,317),rep(46,296),rep(47,315),rep(48,985),
+             rep(49,120),rep(50,71),rep(51,43),
+             rep(52,148),rep(53,232),rep(54,66),
+             rep(55,75),
+             rep(56,180),rep(57,745),rep(58,901),rep(59,796),rep(60,80),rep(61,69),rep(62,397),
+             rep(63,147),rep(64,125),
+             rep(65,21), rep(66,10), rep(67,37),
+             rep(68,446),
+             rep(69,72),
+             rep(70,1684), rep(71,430), rep(72,52), rep(73,69), rep(74,84)
+)
 
+
+for_typ <- c(rep("Bank_finans",144),rep("Bank_finans",135),
+             rep("Bemaning",30),rep("Bemaning",103),
+             rep("Bygg",1737),rep("Bygg",122),rep("Bygg",3437),rep("Bygg",2491),rep("Bygg",23),rep("Bygg",22),rep("Bygg",22),
+             rep("Data_IT",48),rep("Data_IT",112),rep("Data_IT",257),rep("Data_IT",15),rep("Data_IT",46),rep("Data_IT",49),rep("Data_IT",41),
+             rep("Fastighet",157),rep("Fastighet",176),rep("Fastighet",216),rep("Fastighet",284),rep("Fastighet",70), rep("Fastighet",18),
+             rep("Fastighet",81),rep("Fastighet",189),rep("Fastighet",146),rep("Fastighet",142), rep("Fastighet",142),rep("Fastighet",653),
+             rep("Fastighet",40),rep("Fastighet",37), rep("Fastighet",66),rep("Fastighet",77),rep("Fastighet",21),
+             rep("Företagstjänster",511),
+             rep("Hotell_Resturang",27),
+             rep("Sjukvard",74),rep("Sjukvard",2465),rep("Sjukvard",501),rep("Sjukvard",3836),rep("Sjukvard",776),rep("Sjukvard",749),
+             rep("Sjukvard",323),rep("Sjukvard",317),rep("Sjukvard",296),rep("Sjukvard",315),rep("Sjukvard",985),
+             rep("Juridik",120),rep("Juridik",71),rep("Juridik",43),
+             rep("Kultur_Noje",148),rep("Kultur_Noje",232),rep("Kultur_Noje",66),
+             rep("Motorfordon",75),
+             rep("Organisationer",180),rep("Organisationer",745),rep("Organisationer",901),rep("Organisationer",796),rep("Organisationer",80),rep("Organisationer",69),rep("Organisationer",397),
+             rep("Partihandel",147),rep("Partihandel",125),
+             rep("Teknik",21), rep("Teknik",10), rep("Teknik",37),
+             rep("Tillverkning",446),
+             rep("Transport",72),
+             rep("Utbildning",1684), rep("Utbildning",430), rep("Utbildning",52), rep("Utbildning",69), rep("Utbildning",84)
+)
+  
+  
+ 
 
 
 df[,names(df)[c(2:7,42:48)]] <- lapply(df[,names(df)[c(2:7,42:48)]],factor)
