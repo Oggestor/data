@@ -1,5 +1,5 @@
 
-class_evaluation <- function(new_data, model, true_y, type = "class", digits = 3,logi = FALSE, cutoff = 0.5){
+class_evaluation <- function(new_data, model, true_y, type = "class", digits = 3,logi = FALSE, cutoff = 0.5, xgboost=FALSE){
   
   # Predikterar klassen för new_data givet den skattade modellen
   if(any(str_detect(class(model), pattern = "keras"))){
@@ -11,7 +11,9 @@ class_evaluation <- function(new_data, model, true_y, type = "class", digits = 3
   }
   
   # Konverterar de predikterade klasserna till en faktor med samma nivåer som de sanna klasserna
-  if(logi == FALSE){
+  if(xgboost == TRUE){
+  pred <- factor(pred, levels = true_y)
+  }else if(logi == FALSE){
   pred <- factor(pred, levels = levels(factor(true_y)))
   }else{
   pred <- ifelse(pred >cutoff, "nej", "ja")
