@@ -213,15 +213,15 @@ for(j in 1:length(bolag1till5)){
                                       df$y3 == "1" | df$y3 == "2" |
                                       df$y2 == "1" | df$y2 == "2"),i] <- "nej"
   
-  df[df$number == bolag1till5[j] & (df$y5 == "4" | df$y5 == "5" |
-                                      df$y3 == "4" | df$y3 == "5" |
-                                      df$y2 == "4" | df$y2 == "5"),i] <- "ja"
+  df[df$number == bolag1till5[j] & (df$y5 == "4" | df$y5 == "5" | df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|
+                                      df$y3 == "4" | df$y3 == "5" | df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
+                                      df$y2 == "4" | df$y2 == "5" | df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "ja"
   
   
-  df[df$number == bolag1till5[j] & 
-       (df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|
-          df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
-          df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "vet ej"
+  # df[df$number == bolag1till5[j] & 
+  #      (df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|
+  #         df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
+  #         df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "vet ej"
   
 }
 
@@ -245,16 +245,16 @@ for(j in 1:length(bolag1till2)){
                                       df$y3 == "1" | 
                                       df$y2 == "1" ),i] <- "ja"
   
-  df[df$number == bolag1till2[j] & (df$y5 == "2" | 
-                                      df$y3 == "2" |
-                                      df$y2 == "2" ),i] <- "nej"
+  df[df$number == bolag1till2[j] & (df$y5 == "2" | df$y5 == "3" | df$y5 == "4" | 
+                                      df$y3 == "2" | df$y3 == "3" | df$y3 == "4" | 
+                                      df$y2 == "2" | df$y2 == "3" | df$y2 == "4"),i] <- "nej"
   
   
-  df[df$number == bolag1till2[j] & 
-       (df$y5 == "3" | df$y5 == "4" | 
-          df$y3 == "3" | df$y3 == "4" | 
-          df$y2 == "3" | df$y2 == "4" ),i] <- "vet ej"
-  
+  # df[df$number == bolag1till2[j] & 
+  #      (df$y5 == "3" | df$y5 == "4" | 
+  #         df$y3 == "3" | df$y3 == "4" | 
+  #         df$y2 == "3" | df$y2 == "4" ),i] <- "vet ej"
+  # 
 }
 
 table(df$y5)
@@ -265,8 +265,8 @@ table(df$y3)
 # age 
 
 
-df[df[,6] == "1",6] <- "25 år eller yngre"
-df[df[,6] == "2",6] <- "26-35 år"
+df[df[,6] == "1",6] <- "35 år eller yngre"
+df[df[,6] == "2",6] <- "35 år eller yngre"
 df[df[,6] == "3",6] <- "36 år eller äldre"
 df[df[,6] == "4",6] <- "36 år eller äldre"
 df[df[,6] == "5",6] <- "36 år eller äldre"
