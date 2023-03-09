@@ -11,7 +11,7 @@ class_evaluation <- function(new_data, model, true_y, type = "class", digits = 3
   }
   
   # Konverterar de predikterade klasserna till en faktor med samma nivåer som de sanna klasserna
-  if(xgboost = TRUE){
+  if(xgboost == TRUE){
   pred <- factor(pred, levels = true_y)
   }else if(logi == FALSE){
   pred <- factor(pred, levels = levels(factor(true_y)))
