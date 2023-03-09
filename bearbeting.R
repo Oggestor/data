@@ -264,6 +264,8 @@ table(df$y3)
 
 # age 
 
+df[df[,6] == "25 år eller yngre",6] <- "35 år eller yngre"
+df[df[,6] == "26-35 år",6] <- "35 år eller yngre"
 
 df[df[,6] == "1",6] <- "35 år eller yngre"
 df[df[,6] == "2",6] <- "35 år eller yngre"
