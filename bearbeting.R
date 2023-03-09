@@ -1,6 +1,11 @@
 library(stringr)
 library(tibble)
 
+
+
+get_webropol_data <- function(y_code = "standard", y_3class = FALSE){
+
+
 for_num <- c(rep(1,144),rep(2,135),
              rep(3,30),rep(4,103),
              rep(5,1737),rep(6,122),rep(7,3437),rep(8,2491),rep(9,23),rep(10,22),rep(11,22),
@@ -155,7 +160,7 @@ df[df[,7] == "Man",7] <- "man"
 df[df[,7] == "3"|df[,7] == "4"|df[,7] == "5"|
      df[,7] == "Vill ej uppge"| df[,7] == "Annat",7] <- "annat/vill ej uppge"
 
-(table(df$sex))
+
 
 
 # v1 & v2
@@ -167,8 +172,7 @@ df[df[,42] == "3",42] <- "vill ej uppge"
 df[df[,43] == "1",43] <- "ja"
 df[df[,43] == "2",43] <- "nej"
 df[df[,43] == "3",43] <- "vill ej uppge"
-(table(df$v1))
-(table(df$v2))
+
 
 
 
@@ -196,6 +200,9 @@ df[df[,47] == "3",47] <- "vill ej uppge"
 
 # y
 bolag1till5 <- c(7,40,42,43)
+
+
+
 for(j in 1:length(bolag1till5)){
   
   if((df[which(df$number == bolag1till5[j])[1],3] == "NA") &
@@ -207,37 +214,50 @@ for(j in 1:length(bolag1till5)){
   }else{
     i <- 4
   }
+  
+  if(y_code == "standard"){
+  
+      df[df$number == bolag1till5[j] & (df$y5 == "1" | df$y5 == "2" |
+                                          df$y3 == "1" | df$y3 == "2" |
+                                          df$y2 == "1" | df$y2 == "2"),i] <- "nej"
+      
+      df[df$number == bolag1till5[j] & (df$y5 == "4" | df$y5 == "5" |
+                                          df$y3 == "4" | df$y3 == "5" |
+                                          df$y2 == "4" | df$y2 == "5"),i] <- "ja"
+      
+      
+      df[df$number == bolag1till5[j] & 
+           (df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|
+              df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
+              df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "vet ej"
+  }else if(y_code == "two"){
     
-    df[df$number == bolag1till5[j] & (df$y5 == "1" | df$y5 == "2" |
-                                    df$y3 == "1" | df$y3 == "2" |
-                                    df$y2 == "1" | df$y2 == "2"),i] <- "nej"
+      df[df$number == bolag1till5[j] & (df$y5 == "1" | df$y5 == "2" |
+                                        df$y3 == "1" | df$y3 == "2" |
+                                        df$y2 == "1" | df$y2 == "2"),i] <- "nej"
   
-  df[df$number == bolag1till5[j] & (df$y5 == "4" | df$y5 == "5" |
-                                    df$y3 == "4" | df$y3 == "5" |
-                                    df$y2 == "4" | df$y2 == "5"),i] <- "ja"
-  
-  
-  df[df$number == bolag1till5[j] & 
-       (df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|
-        df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
-        df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "vet ej"
+      df[df$number == bolag1till5[j] & (df$y5 == "4" | df$y5 == "5" | df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|
+                                         df$y3 == "4" | df$y3 == "5" | df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
+                                        df$y2 == "4" | df$y2 == "5" | df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "ja"
   
   
- # df[df$number == bolag1till5[j] & (df$y5 == "1" | df$y5 == "2" |
-   #                                   df$y3 == "1" | df$y3 == "2" |
-   #                                   df$y2 == "1" | df$y2 == "2"),i] <- "nej"
   
- # df[df$number == bolag1till5[j] & (df$y5 == "4" | df$y5 == "5" | df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|
-  #                                    df$y3 == "4" | df$y3 == "5" | df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
-   #                                   df$y2 == "4" | df$y2 == "5" | df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "ja"
+    
+  }else{
+    
+      df[df$number == bolag1till5[j] & (df$y5 == "1" | 
+                                          df$y3 == "1" | 
+                                          df$y2 == "1" ),i] <- "nej"
+      
+      df[df$number == bolag1till5[j] & (df$y5 == "4" | df$y5 == "5" | df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|df$y5 == "2" |
+                                          df$y3 == "4" | df$y3 == "5" | df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|df$y3 == "2" |
+                                          df$y2 == "4" | df$y2 == "5" | df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"| df$y2 == "2"),i] <- "ja"
     
     
+    
+  }
   
   
-  # df[df$number == bolag1till5[j] & 
-  #      (df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|
-  #         df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|
-  #         df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"),i] <- "vet ej"
   
 }
 
@@ -255,43 +275,37 @@ for(j in 1:length(bolag1till2)){
   }else{
     i <- 4
   }
-    
-        df[df$number == bolag1till2[j] & (df$y5 == "1"  |
-                                      df$y3 == "1" | 
-                                      df$y2 == "1" ),i] <- "ja"
-    
-    df[df$number == bolag1till2[j] & (df$y5 == "2" | 
-                                      df$y3 == "2" |
-                                      df$y2 == "2" ),i] <- "nej"
-    
-    
-    df[df$number == bolag1till2[j] & 
-         (df$y5 == "3" | df$y5 == "4" | 
-          df$y3 == "3" | df$y3 == "4" | 
-          df$y2 == "3" | df$y2 == "4" ),i] <- "vet ej"
-    
-    
   
   
- # df[df$number == bolag1till2[j] & (df$y5 == "1"  | df$y5 == "3" | df$y5 == "4" | 
-   #                                   df$y3 == "1" |  df$y3 == "3" | df$y3 == "4" | 
-   #                                   df$y2 == "1" | df$y2 == "3" | df$y2 == "4"),i] <- "ja"
+  if(y_code == "standard"){
+      df[df$number == bolag1till2[j] & (df$y5 == "1"  |
+                                          df$y3 == "1" | 
+                                          df$y2 == "1" ),i] <- "ja"
+      
+      df[df$number == bolag1till2[j] & (df$y5 == "2" | 
+                                          df$y3 == "2" |
+                                          df$y2 == "2" ),i] <- "nej"
+      
+      
+      df[df$number == bolag1till2[j] & 
+           (df$y5 == "3" | df$y5 == "4" | 
+              df$y3 == "3" | df$y3 == "4" | 
+              df$y2 == "3" | df$y2 == "4" ),i] <- "vet ej"
+  }else{
+    
+      df[df$number == bolag1till2[j] & (df$y5 == "1"  | df$y5 == "3" | df$y5 == "4" |
+                                          df$y3 == "1" |  df$y3 == "3" | df$y3 == "4" |
+                                          df$y2 == "1" | df$y2 == "3" | df$y2 == "4"),i] <- "ja"
+      
+      df[df$number == bolag1till2[j] & (df$y5 == "2" |
+                                          df$y3 == "2" |
+                                          df$y2 == "2" ),i] <- "nej"
+    
+  }
   
-  #df[df$number == bolag1till2[j] & (df$y5 == "2" | 
-    #                                  df$y3 == "2" |
-      #                                df$y2 == "2" ),i] <- "nej"
-  
-  
-  # df[df$number == bolag1till2[j] & 
-  #      (df$y5 == "3" | df$y5 == "4" | 
-  #         df$y3 == "3" | df$y3 == "4" | 
-  #         df$y2 == "3" | df$y2 == "4" ),i] <- "vet ej"
-  # 
 }
 
-table(df$y5)
-table(df$y2)
-table(df$y3)
+
 
 
 # age 
@@ -313,15 +327,24 @@ table(df$age)
 df[df == "NA"] <- NA
 
 
-df$y <- c(df$y5[1:7656],df$y3[7657:12003],df$y2[12004:13527],
-          df$y3[13528:14512])
-
-df1 <- df[,-c(3,4,5,48)]
-df1[(df1 == "vet ej" | df1== "annat/vill ej uppge" |df1== "vill ej uppge" |df1 == "Vill ej uppge" )] <- NA
+df$y <- c(df$y5[1:7665],df$y3[7666:12002],df$y2[12003:13527],
+          df$y3[13528:14512]) # STÄMMER [kontroll 9 mars]
 
 
-df_vetej <- cbind(df1[,1:2],df[,3:5],df1[,3:44],df[,48])
-df[df == "vet ej" | df == "annat/vill ej uppge" |df == "vill ej uppge" |df == "Vill ej uppge" ] <- NA
+if(y_3class == TRUE){
+  
+    df1 <- df[,-c(3,4,5,48)]
+    df1[(df1 == "vet ej" | df1== "annat/vill ej uppge" |df1== "vill ej uppge" |df1 == "Vill ej uppge" )] <- NA
+    df <- cbind(df1[,1:2],df[,3:5],df1[,3:44],df[,48])
+    
+}else{
+  
+    df[df == "vet ej" | df == "annat/vill ej uppge" |df == "vill ej uppge" |df == "Vill ej uppge" ] <- NA
+  
+}
+
+
+
 
 df[,names(df)[c(2:7,42:48)]] <- lapply(df[,names(df)[c(2:7,42:48)]],factor)
 df[,names(df)[-c(2:7,42:48)]] <- lapply(df[,names(df)[-c(2:7,42:48)]],as.numeric)
@@ -329,32 +352,18 @@ df[,names(df)[-c(2:7,42:48)]] <- lapply(df[,names(df)[-c(2:7,42:48)]],as.numeric
 
 df_bygg <- df[df$type=="Bygg",c(1:7,8,9,15,20,21:26,27,38:48)]
 df_bygg <- df_bygg[,-c(4:5,21:22)]
-sum(table(df_bygg$y5))
+
 
 df_sjukvard <- df[df$type=="Sjukvard",c(1:5,9,11,13:19,21:24,28:37,40:42,48)]
 df_sjukvard <- df_sjukvard[,-3]
 df_sjukvard <- df_sjukvard[-(3318:4337),] # TAR BORT STORT NA GAP
-sum(table(df_sjukvard$y))
-
-
-df_b_test <- df_bygg[!is.na(df_bygg$y),]
 
 
 
-# VET EJ på y DF -----------------------------------------------------------------------
-
-df_vetej[,names(df_vetej)[c(2:7,42:48)]] <- lapply(df_vetej[,names(df_vetej)[c(2:7,42:48)]],factor)
-df_vetej[,names(df_vetej)[-c(2:7,42:48)]] <- lapply(df_vetej[,names(df_vetej)[-c(2:7,42:48)]],as.numeric)
+return(list("df_bygg" = df_bygg,"df_sjukvard" =df_sjukvard))
 
 
-df_vetej_bygg <- df_vetej[df_vetej$type=="Bygg",c(1:7,8,9,15,20,21:26,27,38:48)]
-df_vetej_bygg <- df_vetej_bygg[,-c(4:5,21:22)]
-sum(table(df_vetej_bygg$y5))
 
-df_vetej_sjukvard <- df_vetej[df_vetej$type=="Sjukvard",c(1:5,9,11,13:19,21:24,28:37,40:42,48)]
-df_vetej_sjukvard <- df_vetej_sjukvard[,-3]
-df_vetej_sjukvard <- df_vetej_sjukvard[-(3318:4337),] # TAR BORT STORT NA GAP
-sum(table(df_vetej_sjukvard$y))
+}
 
 
-df_vetej_b_test <- df_vetej_bygg[!is.na(df_vetej_bygg$y),]
