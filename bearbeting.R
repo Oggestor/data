@@ -306,15 +306,15 @@ get_webropol_data <- function(y_code = "standard", y_3class = FALSE){
                                           df$y3 == "1" | 
                                           df$y2 == "1" ),i] <- "nej"
       
-      df[df$number == bolag1till5[j] & (   df$y5 == "5" |
-                                           df$y3 == "5" |
-                                           df$y2 == "5"),i] <- "ja"
+      df[df$number == bolag1till5[j] & (   df$y5 == "5" |  df$y5 == "4" |
+                                           df$y3 == "5" |  df$y3 == "4" |
+                                           df$y2 == "5" |  df$y2 == "4"),i] <- "ja"
       
       
       df[df$number == bolag1till5[j] & 
-           (df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|  df$y5 == "2" |  df$y5 == "4" |
-              df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|  df$y3 == "2" |  df$y3 == "4" |
-              df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"|  df$y2 == "2" |  df$y2 == "4"),i] <- "vet ej"
+           (df$y5 == "3" | df$y5 == "-1" | df$y5 == "6"|  df$y5 == "2" | 
+              df$y3 == "3" | df$y3 == "-1" | df$y3 == "6"|  df$y3 == "2" | 
+              df$y2 == "3" | df$y2 == "-1" | df$y2 == "6"|  df$y2 == "2" ),i] <- "vet ej"
       
       
     }
@@ -339,7 +339,7 @@ get_webropol_data <- function(y_code = "standard", y_3class = FALSE){
       i <- 4
     }
   
-    if(y_code == "standard" | y_code == "1-5"){
+    if(y_code == "standard" | y_code == "1-45"){
     
       df[df$number == bolag1till2[j] &  (df$y5 == "1"  |
                                           df$y3 == "1" |
