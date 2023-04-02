@@ -1,23 +1,41 @@
 get_confusion <- function(val,train,dig=3,col="#f8f4f4"){
   
-eva <- val
-eva2 <- train
-kbl(cbind(eva$confusion_matrix,eva2$confusion_matrix),booktabs = T,linesep = "", digits = dig,
-    caption = "Förväxlingsmatris") %>%
-    add_header_above(c(" ", "Valideringsdata" = 2, "Träningsdata" = 2)) %>%
+  eva <- val
+  eva2 <- train
+  
+  mat <- matrix(NA, 2,6)
+  
+  colnames(mat) <- c(" ", " ","ja","nej","ja","nej")
+  mat[1,1:2] <-c("Sann klass","ja")
+  mat[2,1:2] <-c("Sann klass","nej")
+  mat[1:2,3:4] <- eva$confusion_matrix
+  mat[1:2,5:6] <- eva2$confusion_matrix
+  
+  
+  
+  kbl(as.data.frame(mat),booktabs = T,linesep = "", caption = "Förväxlingsmatris", escape = FALSE) %>%
+    add_header_above(c(" ","", "Valideringsdata" = 2, "Träningsdata" = 2)) %>% 
+    add_header_above(c(" "," ","Predikterad klass" = 4), bold = T) %>% 
+    column_spec(1, bold = T, width = "7em") %>%
+    collapse_rows(1, latex_hline = "none") %>% 
+    column_spec(5:6, background  = col) %>% 
+    collapse_rows(columns = 1,latex_hline = "none", valign = "middle") %>% 
     kable_classic() %>%
-    column_spec(4:5, background  = col) %>% 
     kable_styling(latex_options = c("HOLD_position"))
+  
+  
+  
+
   
 }  
 
 
 get_overall <- function(val,train,dig=3,col="#f8f4f4"){
   
-eva <- val
-eva2 <- train
-kbl(cbind(eva$overall[1],eva2$overall[1]),booktabs = T,linesep = "", digits = dig,
-    caption = "Träffsäkerhet, valideringsdata",) %>%
+  eva <- val
+  eva2 <- train
+  kbl(cbind(eva$overall[1],eva2$overall[1]),booktabs = T,linesep = "", digits = dig,
+      caption = "Träffsäkerhet, valideringsdata",) %>%
     add_header_above(c("Valideringsdata" = 1, "Träningsdata" = 1)) %>%
     kable_classic() %>%
     column_spec(2, background  = col) %>% 
@@ -28,16 +46,18 @@ kbl(cbind(eva$overall[1],eva2$overall[1]),booktabs = T,linesep = "", digits = di
 
 get_sens <- function(val,train,dig=3,col="#f8f4f4"){
   
-eva <- val
-eva2 <- train
-mat <- cbind(eva$class_wise,eva2$class_wise)
-rownames(mat) <- c("Sensitivitet", "Specificitet")
-kbl(mat,booktabs = T,linesep = "", digits = dig,
-    caption = "Sensitivitet och specificitet") %>%
+  eva <- val
+  eva2 <- train
+  mat <- cbind(eva$class_wise,eva2$class_wise)[1,]
+  mat <- t(as.matrix(mat))
+  rownames(mat) <- c("Sensitivitet")
+  colnames(mat) <- c("ja","nej","ja","nej")
+  kbl(mat,booktabs = T,linesep = "", digits = dig,
+      caption = "Sensitivitet") %>%
     add_header_above(c(" ", "Valideringsdata" = 2, "Träningsdata" = 2)) %>%
     kable_classic() %>%
     column_spec(4:5, background  = col) %>% 
     kable_styling(latex_options = c("HOLD_position"))
-
   
-}  
+  
+} 
