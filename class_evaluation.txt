@@ -14,7 +14,8 @@ class_evaluation <- function(new_data, model, true_y, type = "class", digits = 3
   if(xgboost == TRUE){
   pred <- factor(as.numeric(pred>cutoff), levels = levels(as.factor(true_y)))
   }else if(logi == FALSE){
-  pred <- factor(pred, levels = levels(factor(true_y)))
+  #pred <- factor(pred, levels = levels(factor(true_y)))
+  pred <- ifelse(pred[,2] >cutoff, "nej", "ja") # NY [3 april]
   }else{
   pred <- ifelse(pred >cutoff, "nej", "ja")
   }
