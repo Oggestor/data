@@ -1,5 +1,5 @@
 
-class_evaluation <- function(new_data, model, true_y, type = "class", digits = 3,logi = FALSE, cutoff = 0.5, xgboost=FALSE){
+class_evaluation <- function(new_data, model, true_y, type = "prob", digits = 3,logi = FALSE, cutoff = 0.5, xgboost=FALSE){
   
   # Predikterar klassen för new_data givet den skattade modellen
   if(any(str_detect(class(model), pattern = "keras"))){
