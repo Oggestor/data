@@ -27,10 +27,12 @@ ConfusionMatrixInfo <- function( data, predict, actual, cutoff )
     geom_violin( fill = "white", color = NA ) +
     geom_jitter( shape = 1 ) + 
     geom_hline( yintercept = cutoff, color = "blue", alpha = 0.6 ) + 
+    labs(x = "Sann klass", y = "Predikterad sannolikhet, P(y=1|x)" ) +
     scale_y_continuous( limits = c( 0, 1 ) ) + 
     scale_color_discrete( breaks = c( "TP", "FN", "FP", "TN" ) ) + # ordering of the legend 
-    guides( col = guide_legend( nrow = 2 ) ) + # adjust the legend to have two rows  
-    ggtitle( sprintf( "Confusion Matrix with Cutoff at %.2f", cutoff ) )
+    guides( col = guide_legend( nrow = 2,title="Typ" ) ) + # adjust the legend to have two rows  
+    ggtitle( sprintf( "Förväxlingsmatris med bestlutgräns på %.2f", cutoff ) ) +
+    theme_bw()
   
   return( list( data = result, plot = plot ) )
 }
@@ -74,24 +76,26 @@ ROCInfo <- function( data, predict, actual, cost.fp, cost.fn )
     geom_line( color = rgb( 0, 0, 1, alpha = 0.3 ) ) +
     geom_point( color = col_by_cost, size = 4, alpha = 0.2 ) + 
     geom_segment( aes( x = 0, y = 0, xend = 1, yend = 1 ), alpha = 0.8, color = "royalblue" ) + 
-    labs( title = "ROC", x = "False Postive Rate", y = "True Positive Rate" ) +
+    labs( title = "ROC", x = "Falska Postiva", y = "Sanna Positiva" ) +
     geom_hline( yintercept = best_tpr, alpha = 0.8, linetype = "dashed", color = "steelblue4" ) +
-    geom_vline( xintercept = best_fpr, alpha = 0.8, linetype = "dashed", color = "steelblue4" )				
+    geom_vline( xintercept = best_fpr, alpha = 0.8, linetype = "dashed", color = "steelblue4" )	+
+    theme_bw()
   
   cost_plot <- ggplot( cost_dt, aes( cutoff, cost ) ) +
     geom_line( color = "blue", alpha = 0.5 ) +
     geom_point( color = col_by_cost, size = 4, alpha = 0.5 ) +
     ggtitle( "Cost" ) +
     scale_y_continuous( labels = comma ) +
-    geom_vline( xintercept = best_cutoff, alpha = 0.8, linetype = "dashed", color = "steelblue4" )	
+    geom_vline( xintercept = best_cutoff, alpha = 0.8, linetype = "dashed", color = "steelblue4" )	+
+    theme_bw()
   
   # the main title for the two arranged plot
-  sub_title <- sprintf( "Cutoff at %.2f - Total Cost = %d, AUC = %.3f", 
+  sub_title <- sprintf( "Bestlutgräns på %.2f - Total konstnad = %g, AUC = %.3f", 
                         best_cutoff, best_cost, auc )
   
   # arranged into a side by side plot
   plot <- arrangeGrob( roc_plot, cost_plot, ncol = 2, 
-                       top = textGrob( sub_title, gp = gpar( fontsize = 16, fontface = "bold" ) ) )
+                       top = textGrob( sub_title, gp = gpar( fontsize = 14, fontface = "bold" ) ) )
   
   return( list( plot 		  = plot, 
                 cutoff 	  = best_cutoff, 
