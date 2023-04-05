@@ -84,7 +84,7 @@ ROCInfo <- function( data, predict, actual, cost.fp, cost.fn )
   cost_plot <- ggplot( cost_dt, aes( cutoff, cost ) ) +
     geom_line( color = "blue", alpha = 0.5 ) +
     geom_point( color = col_by_cost, size = 4, alpha = 0.5 ) +
-    ggtitle( "Cost" ) +
+    labs( title = "Kostnad", x = "Beslutgräns", y = "Kostnad" ) +
     scale_y_continuous( labels = comma ) +
     geom_vline( xintercept = best_cutoff, alpha = 0.8, linetype = "dashed", color = "steelblue4" )	+
     theme_bw()
