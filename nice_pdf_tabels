@@ -17,8 +17,9 @@ get_confusion <- function(val,train,dig=3,col="#f8f4f4"){
     add_header_above(c(" ","", "Valideringsdata" = 2, "Träningsdata" = 2)) %>% 
     add_header_above(c(" "," ","Predikterad klass" = 4), bold = T) %>% 
     column_spec(1, bold = T, width = "7em") %>%
-    collapse_rows(1, latex_hline = "none") %>% 
     column_spec(5:6, background  = col) %>% 
+    collapse_rows(1, latex_hline = "none") %>% 
+    
     collapse_rows(columns = 1,latex_hline = "none", valign = "middle") %>% 
     kable_classic() %>%
     kable_styling(latex_options = c("HOLD_position"))
