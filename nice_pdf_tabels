@@ -36,7 +36,7 @@ get_overall <- function(val,train,dig=3,col="#f8f4f4"){
   eva <- val
   eva2 <- train
   kbl(cbind(eva$overall[1],eva2$overall[1]),booktabs = T,linesep = "", digits = dig,
-      caption = "Träffsäkerhet, valideringsdata",) %>%
+      caption = "Träffsäkerhet",) %>%
     add_header_above(c("Valideringsdata" = 1, "Träningsdata" = 1)) %>%
     kable_classic() %>%
     column_spec(2, background  = col) %>% 
