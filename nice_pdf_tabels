@@ -54,7 +54,7 @@ get_sens <- function(val,train,dig=3,col="#f8f4f4"){
   rownames(mat) <- c("ja")
   colnames(mat) <- c("Sensitivitet","Specificitet","Sensitivitet","Specificitet")
   kbl(mat,booktabs = T,linesep = "", digits = dig,
-      caption = "Sensitivitet & Specificitet") %>%
+      caption = "Sensitivitet och specificitet") %>%
     add_header_above(c(" ", "Valideringsdata" = 2, "Träningsdata" = 2)) %>%
     kable_classic() %>%
     column_spec(4:5, background  = col) %>% 
