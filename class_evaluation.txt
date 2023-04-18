@@ -40,6 +40,9 @@ class_evaluation <- function(new_data, model, true_y, type = "prob", digits = 3,
      specificity[i] <- sum(confusion[-i, -i])/sum(confusion[-i, ])
   }
 
+  # WIIIK INSERT
+  auc <- cutoff_search(new_data, model, true_y, type , digits ,logi , xgboost,cutoff)$auc
+
   # Sammanställer alla resultat i en egen lista som sedan returneras
   evaluation <- list(confusion_matrix = confusion, 
                      overall = 
@@ -47,7 +50,8 @@ class_evaluation <- function(new_data, model, true_y, type = "prob", digits = 3,
                              mis = misclass),
                      class_wise = 
                        rbind(sensitivity = round(sensitivity, digits = digits),
-                             specificity = round(specificity, digits = digits))
+                             specificity = round(specificity, digits = digits)),
+                      auc = auc
                      )
   
   return(evaluation)
