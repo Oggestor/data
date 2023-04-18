@@ -378,15 +378,15 @@ get_webropol_data <- function(y_code = "standard", y_3class = FALSE){
   
   # age 
   
-  df[df[,6] == "25 år eller yngre",6] <- "35 år eller yngre"
-  df[df[,6] == "26-35 år",6] <- "35 år eller yngre"
+  df[df[,6] == "25 år eller yngre",6] <- "<=35 år"
+  df[df[,6] == "26-35 år",6] <- "<=35 år"
   
-  df[df[,6] == "1",6] <- "35 år eller yngre"
-  df[df[,6] == "2",6] <- "35 år eller yngre"
-  df[df[,6] == "3",6] <- "36 år eller äldre"
-  df[df[,6] == "4",6] <- "36 år eller äldre"
-  df[df[,6] == "5",6] <- "36 år eller äldre"
-  df[df[,6] == "6",6] <- "36 år eller äldre"
+  df[df[,6] == "1",6] <- "<=35 år" # <=35 år
+  df[df[,6] == "2",6] <- "<=35 år" 
+  df[df[,6] == "3",6] <- ">35 år"
+  df[df[,6] == "4",6] <- ">35 år"
+  df[df[,6] == "5",6] <- ">35 år"
+  df[df[,6] == "6",6] <- ">35 år"
   df[df[,6] == "7",6] <- "Vill ej uppge"
   
   table(df$age) 
