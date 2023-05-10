@@ -47,7 +47,21 @@ else{ mod_text <- ", XGBoosting"}
 }  
 
 
-get_overall <- function(val,train,dig=3,col="#f8f4f4"){
+get_overall <- function(val,train,dig=3,col="#f8f4f4",bransch="b",mod=1){
+
+br_text <- ""
+if(bransch == "b"){
+br_text <- "för byggbranschen"
+}else{
+br_text <- "för sjukvårdbranschen"
+}
+
+mod_text <- ""
+
+if(mod==1){ mod_text <- ", logistisk regression"}
+else if(mod==2){ mod_text <- ", klassificeringsträd"}
+else if(mod==3){ mod_text <- ", Random Forest"}
+else{ mod_text <- ", XGBoosting"}
   
   eva <- val
   eva2 <- train
@@ -61,7 +75,21 @@ get_overall <- function(val,train,dig=3,col="#f8f4f4"){
 }  
 
 
-get_sens <- function(val,train,dig=3,col="#f8f4f4"){
+get_sens <- function(val,train,dig=3,col="#f8f4f4",bransch="b",mod=1){
+
+br_text <- ""
+if(bransch == "b"){
+br_text <- "för byggbranschen"
+}else{
+br_text <- "för sjukvårdbranschen"
+}
+
+mod_text <- ""
+
+if(mod==1){ mod_text <- ", logistisk regression"}
+else if(mod==2){ mod_text <- ", klassificeringsträd"}
+else if(mod==3){ mod_text <- ", Random Forest"}
+else{ mod_text <- ", XGBoosting"}
   
   eva <- val
   eva2 <- train
