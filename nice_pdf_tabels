@@ -1,4 +1,4 @@
-get_confusion <- function(val,train,dig=3,col="#f8f4f4",bransch="b",mod=1){
+get_confusion <- function(val,train,bransch="b",mod=1,dig=3,col="#f8f4f4"){
 
 br_text <- ""
 if(bransch == "b"){
@@ -47,7 +47,7 @@ else{ mod_text <- ", XGBoosting"}
 }  
 
 
-get_overall <- function(val,train,dig=3,col="#f8f4f4",bransch="b",mod=1){
+get_overall <- function(val,train,bransch="b",mod=1,dig=3,col="#f8f4f4"){
 
 br_text <- ""
 if(bransch == "b"){
@@ -75,7 +75,7 @@ else{ mod_text <- ", XGBoosting"}
 }  
 
 
-get_sens <- function(val,train,dig=3,col="#f8f4f4",bransch="b",mod=1){
+get_sens <- function(val,train,bransch="b",mod=1,dig=3,col="#f8f4f4"){
 
 br_text <- ""
 if(bransch == "b"){
