@@ -2,17 +2,17 @@ get_confusion <- function(val,train,bransch="b",mod=1,dig=3,col="#f8f4f4"){
 
 br_text <- ""
 if(bransch == "b"){
-br_text <- "för byggbranschen"
+br_text <- "för byggbranschen,"
 }else{
-br_text <- "för sjukvårdbranschen"
+br_text <- "för sjukvårdbranschen,"
 }
 
 mod_text <- ""
 
-if(mod==1){ mod_text <- ", logistisk regression"}
-else if(mod==2){ mod_text <- ", klassificeringsträd"}
-else if(mod==3){ mod_text <- ", Random Forest"}
-else{ mod_text <- ", XGBoosting"}
+if(mod==1){ mod_text <- "logistisk regression"}
+else if(mod==2){ mod_text <- "klassificeringsträd"}
+else if(mod==3){ mod_text <- "Random Forest"}
+else{ mod_text <- "XGBoosting"}
   
   eva <- val
   eva2 <- train
@@ -51,17 +51,17 @@ get_overall <- function(val,train,bransch="b",mod=1,dig=3,col="#f8f4f4"){
 
 br_text <- ""
 if(bransch == "b"){
-br_text <- "för byggbranschen"
+br_text <- "för byggbranschen,"
 }else{
-br_text <- "för sjukvårdbranschen"
+br_text <- "för sjukvårdbranschen,"
 }
 
 mod_text <- ""
 
-if(mod==1){ mod_text <- ", logistisk regression"}
-else if(mod==2){ mod_text <- ", klassificeringsträd"}
-else if(mod==3){ mod_text <- ", Random Forest"}
-else{ mod_text <- ", XGBoosting"}
+if(mod==1){ mod_text <- "logistisk regression"}
+else if(mod==2){ mod_text <- "klassificeringsträd"}
+else if(mod==3){ mod_text <- "Random Forest"}
+else{ mod_text <- "XGBoosting"}
   
   eva <- val
   eva2 <- train
@@ -79,17 +79,17 @@ get_sens <- function(val,train,bransch="b",mod=1,dig=3,col="#f8f4f4"){
 
 br_text <- ""
 if(bransch == "b"){
-br_text <- "för byggbranschen"
+br_text <- "för byggbranschen,"
 }else{
-br_text <- "för sjukvårdbranschen"
+br_text <- "för sjukvårdbranschen,"
 }
 
 mod_text <- ""
 
-if(mod==1){ mod_text <- ", logistisk regression"}
-else if(mod==2){ mod_text <- ", klassificeringsträd"}
-else if(mod==3){ mod_text <- ", Random Forest"}
-else{ mod_text <- ", XGBoosting"}
+if(mod==1){ mod_text <- "logistisk regression"}
+else if(mod==2){ mod_text <- "klassificeringsträd"}
+else if(mod==3){ mod_text <- "Random Forest"}
+else{ mod_text <- "XGBoosting"}
   
   eva <- val
   eva2 <- train
