@@ -1,4 +1,18 @@
-get_confusion <- function(val,train,dig=3,col="#f8f4f4"){
+get_confusion <- function(val,train,dig=3,col="#f8f4f4",bransch="b",mod=1){
+
+br_text <- ""
+if(bransch == "b"){
+br_text <- "för byggbranschen"
+}else{
+br_text <- "för sjukvårdbranschen"
+}
+
+mod_text <- ""
+
+if(mod==1){ mod_text <- ", logistisk regression"}
+else if(mod==2){ mod_text <- ", klassificeringsträd"}
+else if(mod==3){ mod_text <- ", Random Forest"}
+else{ mod_text <- ", XGBoosting"}
   
   eva <- val
   eva2 <- train
@@ -13,7 +27,9 @@ get_confusion <- function(val,train,dig=3,col="#f8f4f4"){
   
   
   
-  kbl(as.data.frame(mat),booktabs = T,linesep = "", caption = "Förväxlingsmatris", escape = FALSE) %>%
+  kbl(as.data.frame(mat),booktabs = T,linesep = "",
+  caption = paste("Förväxlingsmatris ",br_text,mod_text),
+  escape = FALSE) %>%
     add_header_above(c(" ","", "Valideringsdata" = 2, "Träningsdata" = 2)) %>% 
     add_header_above(c(" "," ","Predikterad klass" = 4), bold = T) %>% 
     column_spec(1, bold = T, width = "7em") %>%
@@ -36,7 +52,7 @@ get_overall <- function(val,train,dig=3,col="#f8f4f4"){
   eva <- val
   eva2 <- train
   kbl(cbind(eva$overall[1],eva2$overall[1]),booktabs = T,linesep = "", digits = dig,
-      caption = "Träffsäkerhet",) %>%
+      caption = paste("Träffsäkerhet ",br_text, mod_text)) %>%
     add_header_above(c("Valideringsdata" = 1, "Träningsdata" = 1)) %>%
     kable_classic() %>%
     column_spec(2, background  = col) %>% 
@@ -54,7 +70,7 @@ get_sens <- function(val,train,dig=3,col="#f8f4f4"){
   rownames(mat) <- c("ja")
   colnames(mat) <- c("Sensitivitet","Specificitet","AUC","Sensitivitet","Specificitet","AUC")
   kbl(mat,booktabs = T,linesep = "", digits = dig,
-      caption = "Sensitivitet, specificitet och AUC") %>%
+      caption = paste("Sensitivitet, specificitet och AUC ",br_text, mod_text)) %>%
     add_header_above(c(" ", "Valideringsdata" = 3, "Träningsdata" = 3)) %>%
     kable_classic() %>%
     column_spec(5:7, background  = col) %>% 
