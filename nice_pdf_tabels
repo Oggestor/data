@@ -19,8 +19,8 @@ else{ mod_text <- "XGBoosting"}
   
   mat <- matrix(NA, 2,6)
   
-  colnames(mat) <- c(" ", " ","ja","nej","ja","nej")
-  mat[1,1:2] <-c("Sann klass","ja")
+  colnames(mat) <- c(" ", " ","inte nej","nej","inte nej","nej")
+  mat[1,1:2] <-c("Sann klass","inte nej")
   mat[2,1:2] <-c("Sann klass","nej")
   mat[1:2,3:4] <- eva$confusion_matrix
   mat[1:2,5:6] <- eva2$confusion_matrix
@@ -95,7 +95,7 @@ else{ mod_text <- "XGBoosting"}
   eva2 <- train
   mat <- cbind(eva$class_wise,eva$auc,eva2$class_wise,eva2$auc)[1,]
   mat <- t(as.matrix(mat))
-  rownames(mat) <- c("ja")
+  rownames(mat) <- c("inte nej")
   colnames(mat) <- c("Sensitivitet","Specificitet","AUC","Sensitivitet","Specificitet","AUC")
   kbl(mat,booktabs = T,linesep = "", digits = dig,
       caption = paste("Sensitivitet, specificitet och AUC ",br_text, mod_text)) %>%
