@@ -4,7 +4,7 @@ br_text <- ""
 if(bransch == "b"){
 br_text <- "för byggbranschen,"
 }else{
-br_text <- "för sjukvårdbranschen,"
+br_text <- "för sjukvårdsbranschen,"
 }
 
 mod_text <- ""
@@ -53,7 +53,7 @@ br_text <- ""
 if(bransch == "b"){
 br_text <- "för byggbranschen,"
 }else{
-br_text <- "för sjukvårdbranschen,"
+br_text <- "för sjukvårdsbranschen,"
 }
 
 mod_text <- ""
@@ -81,7 +81,7 @@ br_text <- ""
 if(bransch == "b"){
 br_text <- "för byggbranschen,"
 }else{
-br_text <- "för sjukvårdbranschen,"
+br_text <- "för sjukvårdsbranschen,"
 }
 
 mod_text <- ""
